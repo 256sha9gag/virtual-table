@@ -1,4 +1,4 @@
-import {VirtualTable} from "../virtual-table/hoc/VirtualTable.ts";
+import {Column, VirtualTable} from "../virtual-table/hoc/VirtualTable.ts";
 
 interface RowData {
     id: number;
@@ -19,9 +19,24 @@ const Table = () => {
         // ...
     ];
 
+    const columns: Column<RowData>[] = [
+        {
+            header: "ID",
+            cell: (data) => data.id,
+        },
+        {
+            header: "Name",
+            cell: (data) => data.name,
+        },
+        {
+            header: "Age",
+            cell: (data) => data.age,
+        },
+    ];
+
     return (
         <div>
-            <VirtualTable data={data} footer={Footer()}/>
+            <VirtualTable data={data} footer={Footer()} columns={columns}/>
         </div>
     );
 };
