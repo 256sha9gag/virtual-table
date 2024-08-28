@@ -1,11 +1,15 @@
-import Table from "./components/Table.tsx";
+import { VirtualScrollTable } from "./components/VirtualScrollTable.tsx";
+import { people } from "./config/config.ts";
 
-function App() {
-    return (
-    <>
-        < Table />
-    </>
-  )
-}
+// TODO добавить возможность горизонтального скролла и изменить типизацию для любых компонентов - не только таблиц
 
-export default App
+const App = () => {
+  return (
+    <div>
+      <h1>Virtual Scroll Table</h1>
+      <VirtualScrollTable rows={people} />
+    </div>
+  );
+};
+
+export default App;
