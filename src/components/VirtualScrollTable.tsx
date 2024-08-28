@@ -4,10 +4,10 @@ import { IVirtualScrollTableProps } from "../types/types";
 
 export function VirtualScrollTable<Row>({
   rows,
+  columns,
   rowHeight = 35,
   tableHeight = 200,
 }: IVirtualScrollTableProps<Row>) {
-  const columns = Object.keys(rows[0]);
   const tableRef = useRef<HTMLTableElement>(null);
 
   const { scroll, onScroll } = useVirtualScroll({
@@ -44,11 +44,9 @@ export function VirtualScrollTable<Row>({
 
       items.push(
         <tr {...rowAttrs} key={index}>
-          {/*{columns.map((column: string | number, i) => (
-            <td key={i}>
-              {(rows[index] as Record<string, string>)[column].toString()}
-            </td>
-          ))}*/}
+          {columns.map((column, i) => (
+            <td key={i}>{column.cell(rows[index])}</td>
+          ))}
         </tr>,
       );
 
@@ -63,8 +61,8 @@ export function VirtualScrollTable<Row>({
       <table>
         <thead>
           <tr className="tr">
-            {columns.map((name, i) => (
-              <th key={i}>{name}</th>
+            {columns.map((column, i) => (
+              <th key={i}>{column.header}</th>
             ))}
           </tr>
         </thead>

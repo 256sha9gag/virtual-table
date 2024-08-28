@@ -1,6 +1,6 @@
-import { RefObject } from "react";
+import { ReactNode, RefObject, UIEvent } from "react";
 
-export interface Scroll {
+export interface IScroll {
   top: number;
   index: number;
   end: number;
@@ -10,6 +10,7 @@ export interface IVirtualScrollTableProps<Row> {
   rows: Row[];
   rowHeight?: number;
   tableHeight?: number;
+  columns: IColumns<Row>[];
 }
 
 export interface IUseVirtualScrollArgs {
@@ -18,6 +19,14 @@ export interface IUseVirtualScrollArgs {
 }
 
 export interface IUseVirtualScrollReturn {
-  scroll: Scroll;
-  onScroll: (event: React.UIEvent<HTMLTableElement>) => void;
+  scroll: IScroll;
+  onScroll: (event: UIEvent<HTMLTableElement>) => void;
+}
+
+export interface IColumns<Row> {
+  header: string;
+  id: string;
+  cell: (row: Row) => ReactNode;
+  footer?: (row: Row) => ReactNode;
+  accessorKey: string;
 }

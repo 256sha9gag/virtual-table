@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import {
+  IScroll,
   IUseVirtualScrollArgs,
   IUseVirtualScrollReturn,
-  Scroll,
 } from "../types/types";
 
 export function useVirtualScroll({
@@ -10,7 +10,7 @@ export function useVirtualScroll({
   ref,
 }: IUseVirtualScrollArgs): IUseVirtualScrollReturn {
   const { tableHeight, rowHeight } = options;
-  const [scroll, setScroll] = useState<Scroll>({
+  const [scroll, setScroll] = useState<IScroll>({
     top: 0,
     index: 0,
     end: Math.ceil((tableHeight * 2) / rowHeight),
